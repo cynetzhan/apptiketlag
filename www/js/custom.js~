@@ -1,0 +1,330 @@
+var menuState = false;
+var viewCurrent, viewPrev, viewNext;
+var backKey = 0;
+    $('document').ready(function() {
+        //  !--link listener--!  //
+        viewHome();
+        viewCurrent='home';
+        $('a#dashboard-link').click(function() {
+          viewHome();
+          menuClose();
+          });
+        $('a#kpdown').click(function() {
+          viewAvGIGH();
+          menuClose();
+          });
+        $('a#gigs-link').click(function() {
+          viewGIGS();
+          menuClose();
+          });
+        $('a#gitl-link').click(function() {
+          viewGITL();
+          menuClose();
+          });
+        $('a#gibk-link').click(function() {
+          viewGIBK();
+          menuClose();
+          });
+        $('a#gikp-link').click(function() {
+          viewGIKP();
+          menuClose();
+          });
+        $('a#gidm-link').click(function() {
+          viewGIDM();
+          menuClose();
+          });
+        $('a#gidr-link').click(function() {
+          viewGIDR();
+          menuClose();
+          });
+        $('a#gibp-link').click(function() {
+          viewGIBP();
+          menuClose();
+          });
+        $('a#gibb-link').click(function() {
+          viewGIBB();
+          menuClose();
+          });
+        $('a#gitk-link').click(function() {
+          viewGITK();
+          menuClose();
+          });
+        $('a#exit').click(function() {
+            navigator.app.exitApp();
+          });
+        //  !-- end of link listener --! //
+        
+		// kendali tombol bilah menu
+        $('button.dropdown-toggle').on('click', function(e){
+          if(!menuState){
+            $(this).parent().toggleClass('open');
+            $('.sidemenu').animate({left:'0'},500); 
+			menuState=true;
+			console.log("menuState is "+menuState); //untuk keperluan debugging
+          } else {
+            $('.sidemenu').animate({left:'-100vw'},500,function() {
+              $('button.dropdown-toggle').parent().toggleClass('open');
+            });
+            menuState=false;
+            console.log("menuState is "+menuState); //untuk keperluan debugging
+          }
+          });
+		  
+		  // kendali tombol refresh
+          $('button.refresh').click(function(vw) {
+            viewRefresh(vw);
+          });
+        });
+
+//  !--kumpulan fungsi kendali link--!  //
+function viewAvGIGH(){
+  $('span.navbar-brand').html("AV Rate GI-GH");
+  $.ajax({
+    url:'http://36.69.25.21/pijar/ajax/baru.php',
+    //url:'http://localhost/oop/ajax_gigs.php',
+    timeout:5000,
+    success: function(res){
+      $('div#contentView').html(res);
+    },
+    error: viewLoading()
+  });  
+  viewPrev = viewCurrent;
+  viewCurrent = 'AvGIGH';
+  
+}
+function viewHome(){
+  //$('span.navbar-brand').html("Dashboard");
+  $.ajax({
+    url:'http://36.69.25.21/pijar/ajax/summaryav.php',
+    //url:'http://localhost/oop/ajax_gigs.php',
+    timeout:5000,
+    success: function(res){
+      $('div#contentView').html(res);
+    },
+    error: viewLoading()
+  });  
+  viewPrev = viewCurrent;
+  viewCurrent = 'home';
+}
+
+function viewGIGS(){
+  $('span.navbar-brand').html("GI Garuda Sakti");
+  $.ajax({
+    url:'http://36.69.25.21/pijar/ajax/ajax_gigs.php',
+    //url:'http://localhost/oop/ajax_gigs.php',
+    timeout:5000,
+    success: function(res){
+      $('div#contentView').html(res);
+    },
+    error: viewLoading()
+  });
+  viewPrev = viewCurrent;
+  viewCurrent = 'gigs';
+}
+
+function viewGITL(){
+  $('span.navbar-brand').html("GI Teluk Lembu");
+  $.ajax({
+    url:'http://36.69.25.21/pijar/ajax/ajax_gitl.php',
+    //url:'http://localhost/oop/ajax_gigs.php',
+    timeout:5000,
+    success: function(res){
+      $('div#contentView').html(res);
+    },
+    error: viewLoading()
+  });
+  viewPrev = viewCurrent;
+  viewCurrent = 'gitl';
+}
+
+function viewGIBK(){
+  $('span.navbar-brand').html("GI Bangkinang");
+  $.ajax({
+    url:'http://36.69.25.21/pijar/ajax/ajax_gibk.php',
+    //url:'http://localhost/oop/ajax_gigs.php',
+    timeout:5000,
+    success: function(res){
+      $('div#contentView').html(res);
+    },
+    error: viewLoading()
+  });
+  viewPrev = viewCurrent;
+  viewCurrent = 'gibk';
+}
+
+function viewGIKP(){
+  $('span.navbar-brand').html("GI Koto Panjang");
+  $.ajax({
+    url:'http://36.69.25.21/pijar/ajax/ajax_gikp.php',
+    //url:'http://localhost/oop/ajax_gigs.php',
+    timeout:5000,
+    success: function(res){
+      $('div#contentView').html(res);
+    },
+    error: viewLoading()
+  });
+  viewPrev = viewCurrent;
+  viewCurrent = 'gikp';
+}
+
+function viewGIDM(){
+  $('span.navbar-brand').html("GI Dumai");
+  $.ajax({
+    url:'http://36.69.25.21/pijar/ajax/ajax_gidm.php',
+    //url:'http://localhost/oop/ajax_gigs.php',
+    timeout:5000,
+    success: function(res){
+      $('div#contentView').html(res);
+    },
+    error: viewLoading()
+  });
+  viewPrev = viewCurrent;
+  viewCurrent = 'gidm';
+}
+
+function viewGIDR(){
+  $('span.navbar-brand').html("GI Duri");
+  $.ajax({
+    url:'http://36.69.25.21/pijar/ajax/ajax_gidr.php',
+    //url:'http://localhost/oop/ajax_gigs.php',
+    timeout:5000,
+    success: function(res){
+      $('div#contentView').html(res);
+    },
+    error: viewLoading()
+  });
+  viewPrev = viewCurrent;
+  viewCurrent = 'gidr';
+}
+
+function viewGIBP(){
+  $('span.navbar-brand').html("GI Balai Pungut");
+  $.ajax({
+    url:'http://36.69.25.21/pijar/ajax/ajax_gibp.php',
+    //url:'http://localhost/oop/ajax_gigs.php',
+    timeout:5000,
+    success: function(res){
+      $('div#contentView').html(res);
+    },
+    error: viewLoading()
+  });
+  viewPrev = viewCurrent;
+  viewCurrent = 'gibp';
+}
+
+function viewGIBB(){
+  $('span.navbar-brand').html("GI Bagan Batu");
+  $.ajax({
+    url:'http://36.69.25.21/pijar/ajax/ajax_gibb.php',
+    //url:'http://localhost/oop/ajax_gigs.php',
+    timeout:5000,
+    success: function(res){
+      $('div#contentView').html(res);
+    },
+    error: viewLoading()
+  });
+  viewPrev = viewCurrent;
+  viewCurrent = 'gibb';
+}
+
+function viewGITK(){
+  $('span.navbar-brand').html("GI Taluk Kuantan");
+  $.ajax({
+    url:'http://36.69.25.21/pijar/ajax/ajax_gitk.php',
+    //url:'http://localhost/oop/ajax_gigs.php',
+    timeout:5000,
+    success: function(res){
+      $('div#contentView').html(res);
+    },
+    error: viewLoading()
+  });
+  viewPrev = viewCurrent;
+  viewCurrent = 'gitk';  
+}
+//  !--end of kumpulan fungsi kendali link--!  //
+
+// !--navigation control function--!  //
+function viewRoute(vw){  // fungsi routing ke fungsi kendali link
+  switch(vw){
+    case 'gigs':
+      viewGIGS();
+      break;
+    case 'gitl':
+      viewGITL();
+      break;
+    case 'gibk':
+      viewGIBK();
+      break;
+    case 'gikp':
+      viewGIKP();
+      break
+    case 'gidm':
+      viewGIDM();
+      break;
+    case 'gidr':
+      viewGIDR();
+      break;
+    case 'gibp':
+      viewGIBP();
+      break;
+    case 'gibb':
+      viewGIBB();
+      break;
+    case 'gitk':
+      viewGITK();
+      break;
+    case 'home':
+      viewHome();
+      break;
+    case 'AvGIGH':
+      viewAvGIGH();
+      break;
+    default:
+      console.log('There is no such menu');
+      break;
+  }
+  console.log("refreshing: "+vw);
+}
+
+function menuOpen(){
+  $(this).parent().toggleClass('open');
+  $('.sidemenu').animate({left:'0'},500);
+  menuState=true;
+}
+
+function menuClose(){
+  if(menuState){
+    $('.sidemenu').animate({left:'-100vw'},500,function() {
+      $('button.dropdown-toggle').parent().toggleClass('open');
+    });
+    menuState=false;
+  }
+  
+}
+
+function viewLoading(){
+  //$('div#contentView').html("<span class='glyphicon glyphicon-refresh loading-ico'></span><br>Sedang Memuat...");
+}
+
+function viewTimeout(){
+  $('div#contentView').html("<h3>Tidak dapat memuat. Periksa sambungan internet anda.</h3>")
+}
+
+function viewRefresh(){
+  viewRoute(viewCurrent);
+}
+
+function prevHist(){
+  viewRoute(viewPrev);
+}
+
+function onBackKeyDown(){
+  console.log("BackKeyPressed");
+  if(menuState){
+      menuClose();
+  } else {
+    prevHist();
+  }
+}
+//  !--end of navigation control function--!  //
+

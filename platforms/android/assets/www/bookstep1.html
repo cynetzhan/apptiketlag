@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *;connect-src * 'self' http://36.69.25.21;script-src * 'self' 'unsafe-eval' 'unsafe-inline'">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <title>title</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+  </head>
+  <body onload="onLoad()">
+    <nav class="navbar navbar-fixed navbar-custom">
+      <div class="navbar-header">
+        <span class="navbar-brand">Halaman Booking</span>
+        <button type="button" class="btn dropdown-toggle" aria-expanded="true">
+          <span class="glyphicon glyphicon-menu-hamburger"></span>
+        </button>
+        <div class="dropdown-menu sidemenu">
+          <div class="row">
+            <div class="col-xs-8 col-sm-5" id="sidemenu-content">
+              <div class="list-group">
+                <a class="list-group-item" href="index.html"><strong>Menu Utama</strong></a>
+                <a class="list-group-item" href="film.html"><strong>Info Film</strong></a>
+                <a class="list-group-item"><strong>Bantuan</strong></a>
+                <a class="list-group-item" id="exit" href="#" ><strong>Keluar</strong></a>
+              </div>
+            </div>
+            <div class="col-xs-4 col-sm-7"></div>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div class="container scrollable" id="contentView">
+	 <div class="panel panel-default" id="panel-login" >
+      <div class="panel-heading"><h2 id="title-head">Info Booking</h2></div>
+       <div class="panel-body">
+        <form name="login" action="bookstep2.html">
+		 <div class="form-group">
+		  <label>ID Booking</label>
+          <input type="text" name="bookid" class="form-control" minlength="4" maxlength="25" placeholder="Booking ID"  value="BK2016052114310001" readonly><!--diisi id booking, generate tglwaktu dari server?-->
+         </div>
+		 <div class="form-group">
+		  <label>Judul Film</label>
+          <input type="text" name="judulfilm" class="form-control" minlength="4" maxlength="25" placeholder="Booking ID"  value="Judul-Judulan" readonly>
+		  <input type="hidden" name="idfilm" class="form-control" value="FM01" readonly><!--diisi id film, retrieve dari db-->
+         </div>
+		 <div class="form-group">
+		  <label>Nama Member</label>
+          <input type="text" name="namauser" class="form-control" minlength="4" maxlength="25" placeholder="Nama User"  value="Ardian Fulan" readonly>
+         </div>
+		 <div class="form-group">
+		  <label>Pilihan Waktu</label>
+          <select name="pilihjam" class="form-control">
+		   <option value="ST11">12.30 : Studio 1</option>
+		   <option value="ST12">13.30 : Studio 1</option>
+		   <option value="ST33">15.30 : Studio 3</option>
+		   <option value="ST14">17.00 : Studio 1</option>
+		   <option value="ST25">20.00 : Studio 2</option>
+		  </select>
+         </div>
+		 <div class="form-group">
+		  <label>Kursi</label>
+          <select name="pilihkursirow">
+		   <option value="A">A</option>
+		   <option value="B">B</option>
+		   <option value="C">C</option>
+		   <option value="D">D</option>
+		   <option value="E">E</option>
+		  </select>
+		  <select name="pilihkursicol">
+		   <option value="1">1</option>
+		   <option value="2">2</option>
+		   <option value="3">3</option>
+		   <option value="4">4</option>
+		   <option value="5">5</option>
+		  </select>
+         </div>
+         <button type="submit" name="submitbutton" id="loginbtn" class="btn btn-md btn-primary form-control">Lanjutkan Ke Pembayaran</button>
+        </form>
+       </div>
+      </div>
+    </div>
+	<script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/custom.js"></script>
+    <!--script src="js/Chart.min.js"></script>
+    <!--script src="http://36.69.25.21/pijar/ajax/js_chart_kerinci.php"></script-->
+  </body>
+</html>

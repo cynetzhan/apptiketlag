@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *;connect-src * 'self' http://36.69.25.21;script-src * 'self' 'unsafe-eval' 'unsafe-inline'">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <title>title</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <style>
+    body{background: url('img/film-menu.png');background-position: bottom right;background-repeat: repeat-x;min-height: 100vh;}
+    </style>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+  </head>
+  <body onload="onLoad()">
+    <nav class="navbar navbar-fixed navbar-custom">
+      <div class="navbar-header">
+        <span class="navbar-brand">Info Film</span>
+        <button type="button" class="btn dropdown-toggle" aria-expanded="true">
+          <span class="glyphicon glyphicon-menu-hamburger"></span>
+        </button>
+        <div class="dropdown-menu sidemenu">
+          <div class="row">
+            <div class="col-xs-8 col-sm-5" id="sidemenu-content">
+              <div class="list-group">
+                <a class="list-group-item" href="index.html"><strong>Menu Utama</strong></a>
+                <a class="list-group-item" href="film.html"><strong>Info Film</strong></a>
+                <a class="list-group-item"><strong>Bantuan</strong></a>
+                <a class="list-group-item" id="exit" href="#" ><strong>Keluar</strong></a>
+              </div>
+            </div>
+            <div class="col-xs-4 col-sm-7"></div>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div class="container scrollable" id="contentView">
+	<h2 id="title-head">Film Yang Telah Dibooking</h2>
+	 <ul class="list-group">
+	  <li class="list-group-item">
+	   <table>
+	    <tr>
+	     <td rowspan="3"><img src="img/or1.jpg" class="film-thumb"/> </td>
+		 <td><span class="film-judul">Judul Film</span></td>
+	    </tr>
+	    <tr>
+	     <td><span class="film-waktu">26 Mei 2016 - [13.30] Studio 1</span></td>
+	    </tr>
+	    <tr>
+	     <td><span class="film-link"><a href="bookstep3.html" class="btn btn-warning btn-sm">Lihat Tiket</a></span></td>
+	    </tr>
+	   </table>
+	  </li>
+	 </ul>
+    </div>
+	<script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/custom.js"></script>
+    <!--script src="js/Chart.min.js"></script>
+    <!--script src="http://36.69.25.21/pijar/ajax/js_chart_kerinci.php"></script-->
+  </body>
+</html>

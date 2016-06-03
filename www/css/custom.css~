@@ -1,0 +1,27 @@
+      body{background: url('../img/menu-main.png');background-position: bottom right;background-repeat: repeat-x;min-height: 100vh;}
+      .sidemenu{position:fixed; top:50px; left:-100vw; width:100vw;height:100vh; overflow:hidden; background-color:rgba(50,50,50,.5); z-index:9999;border-radius:0px; border:none; margin:0px; padding:0px;}
+      #sidemenu-content{background-color:rgba(50,50,50,1);height:100vh;padding:25px;}
+      .navbar-custom{width:100vw; height:50px; padding:2px;background-color:#3874AE;border-radius:0px;}
+      button.dropdown-toggle{float:left;margin-right:.5em;border:none;border-radius:0;font-size:x-large;background-color:transparent;color:white;}
+      button.refresh{float:right;margin-left:.5em;border:none;border-radius:0;font-size:x-large;background-color:transparent;color:white;}
+      button.dropdown-toggle:active, button.dropdown-toggle:hover, button.dropdown-toggle:focus, button.refresh:active, button.refresh:hover, button.refresh:focus{color:white;}
+      nav{box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);}
+      .navbar-brand{font-size:1.6em;padding:5px;float:none;color:white;line-height:40px;}
+      .box{background:#fff;border: 1px solid hsla(0,0%,62%,1);border-radius:5px;padding:10px;margin-bottom:20px;box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);width:inherit;}
+      .circle-stat{background-color:#dfdfdf;border:6px solid #337ab7;border-radius:900px;color:#4f4f4f;width:7em;height:7em;text-align:center;margin:10px auto;}
+      .slight-big{font-size:3em;}
+      .progress{background-color:#afafaf;}
+      .box-group{padding:5px;}
+      .box-content{padding-left:20px;}
+      .box-heading{font-size:2em;}
+	  .center{text-align:center}
+	  #title-head{margin:10px auto 30px;}
+	  .film-thumb{height:100px;width:70px;margin:10px;margin-left:5px;}
+	  .film-judul{display:inline-block;font-size:16px;font-weight:800}
+	  .film-waktu{display:inline-block;font-size:13px;}
+	  #btn-daftar{width:100%}
+	  .film-deskripsi{display:inline-block;border:1px solid #afafaf;border-radius:4px;padding:5px;background:#f0ab12;}
+	  .page-btn{display: inline-block;padding: 10px 16px;margin-bottom: 20px;font-size: 18px;font-weight: 400;text-align: center;white-space: nowrap;vertical-align: middle;-ms-touch-action: manipulation;touch-action: manipulation;cursor: pointer;border: 1px solid rgba(0, 0, 0, 0);border-radius: 2px;box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);width:80vw}
+      .status-cb{font-size:1em;float:right;margin-top:5px;}
+      @-webkit-keyframes icorotate{ from { -webkit-transform:rotateZ(0deg); } to { -webkit-transform:rotateZ(360deg); } }
+      .loading-ico{font-size:x-large; -webkit-animation-name:icorotate; -webkit-animation-duration:.5s; -webkit-animation-iteration-count:infinite; -webkit-animation-direction:alternate;}
