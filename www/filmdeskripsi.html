@@ -12,6 +12,32 @@
     <link rel="stylesheet" href="css/custom.css">
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/query.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    var que = new QueryData();
+    url = 'http://192.168.43.205/bioskop88/jsonfilm.php?idfilm='+que.film;
+
+      $.getJSON(url, function(res){
+
+        $('#film-deskripsi').append(res['1'].descr)
+        
+        $('#title-head').append(res['1'].nama)
+        
+        $('#durasi').append('<td id="durasi"><span class="glyphicon glyphicon-time"></span> '+res['1'].durasi+' Menit</td>')
+        
+        var bookStatus = res['1'].status; 
+        
+        if (bookStatus == 'PLAY') {
+         $('#book').append('<td><span class="film-link"><a href="login.html" class="btn btn-info btn-sm">Booking Now</a></span></td></tr>')   
+        }else{
+          $('#book').append('<td><span class="film-link">Coming Soon</span></td></tr>')
+        }
+
+      });
+      //getJSON
+      
+    </script>
   </head>
   <body onload="onLoad()">
     <nav class="navbar navbar-fixed navbar-custom">
@@ -36,26 +62,28 @@
       </div>
     </nav>
     <div class="container scrollable" id="contentView">
-	<h2 id="title-head">Judul Film</h2>
+	<h2 id="title-head"></h2>
 	 <table>
 	  <tr>
 	   <td rowspan="4"><img src="img/or1.jpg" class="film-thumb"/></td>
 	   <td><span class="glyphicon glyphicon-star"></span> Wak Atan, Wak Bedil, Mas Bandi, Neng Lontong</td>
 	  </tr>
 	  <tr>
-	   <td><span class="glyphicon glyphicon-time"></span> 100 Menit</td>
+	   
 	  </tr>
+    <tr id="durasi">
+      
+    </tr>
 	  <tr>
 	   <td><span class="glyphicon glyphicon-flag"></span> Komedi, Horror</td>
 	  </tr>
-	  <tr>
-	     <td><span class="film-link"><a href="login.html" class="btn btn-info btn-sm">Booking Now</a></span></td>
-	    </tr>
+	  <tr id="book">
+	     
 	  <tr>
 	   <td colspan="2"><h2>Deskripsi Film</h2></td>
 	  </tr>
 	  <tr>
-	   <td colspan="2"><span class="film-deskripsi">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nam malesuada sapien eu nibh. Etiam pede nunc, vestibulum vel, rutrum et, tincidunt eu, enim. Donec ut urna. Fusce nonummy commodo dui. Etiam cursus purus interdum libero. Suspendisse venenatis. Curabitur risus urna, placerat et, luctus pulvinar, auctor vel, orci. Nam sed nisl nec elit suscipit ullamcorper.</span></td>
+	   <td colspan="2"><span id="film-deskripsi" class="film-deskripsi"></span></td>
 	  </tr>
 	 </table><br>
    <a href="film.html" class="page-btn btn-info btn-lg">Kembali Ke Info Film</a>
@@ -64,6 +92,6 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/custom.js"></script>
     <!--script src="js/Chart.min.js"></script>
-    <!--script src="http://36.69.25.21/pijar/ajax/js_chart_kerinci.php"></script-->
+    <!script src="http://36.69.25.21/pijar/ajax/js_chart_kerinci.php"></script-->
   </body>
 </html>
