@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="css/custom.css">
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/qrcode.js"></script>
   </head>
   <body onload="onLoad()">
     <nav class="navbar navbar-fixed navbar-custom">
@@ -60,7 +61,21 @@
      <div class="form-group">
 		  <label>QR Code</label><br>
       <em>Tunjukkan kepada petugas bioskop untuk ditukarkan menjadi tiket.</em>
-      <br><img src="img/qrcode.png"/>
+      <div id="qr-code">
+        
+      </div>
+      <script type="text/javascript">
+      var qrcode = new QRCode(document.getElementById("qr-code"), {
+        text: "null-id",
+        width: 128,
+        height: 128,
+        colorDark : "#000000",
+        colorLight : "#ffffff",
+        correctLevel : QRCode.CorrectLevel.H
+      });
+</script>
+
+      <br>
      </div>
      
         </form>
