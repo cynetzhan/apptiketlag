@@ -26,7 +26,8 @@
               <div class="list-group">
                 <a class="list-group-item" href="index.html"><strong>Menu Utama</strong></a>
                 <a class="list-group-item" href="film.html"><strong>Info Film</strong></a>
-                <a class="list-group-item"><strong>Bantuan</strong></a>
+                <a class="list-group-item" href="bantuan.html"><strong>Bantuan</strong></a>
+                <a class="list-group-item" id="loginmenubtn"><strong><span id="loginstat"></span></strong></a>
                 <a class="list-group-item" id="exit" href="#" ><strong>Keluar</strong></a>
               </div>
             </div>
@@ -49,7 +50,7 @@
     <script src="js/custom.js"></script>
     <script>
 $.ajax({
-    url:'http://192.168.43.205/bioskop88/jsonfilm.php',
+    url:'http://pemesanantiketbioskop88pekanbaru.890m.com/jsonfilm.php',
     timeout:5000,
     success: function(res){
 	  var obj = JSON.parse(res);
@@ -61,7 +62,7 @@ $.ajax({
 		for(j=0;j<obj[i]['totaljam'];j++){film=film+"["+obj[i]['jam'][j]+"]";}
 		film=film+"</span></td></tr>";
 		if(obj[i]['status']=="PLAY")
-		 film=film+"<tr><td><span class='film-link'><a href='bookstep1.html?film="+obj[i]['idfilm']+"' class='btn btn-info btn-sm'>Booking Now</a> <a href='filmdeskripsi.html?film=fm001' class='btn btn-warning btn-sm'>Selengkapnya</a></span></td></tr>";
+		 film=film+"<tr><td><span class='film-link'><a href='login.html' class='btn btn-info btn-sm' onclick=bookFilmTemp('"+obj[i]['idfilm']+"')>Booking Now</a> <a href='filmdeskripsi.html?film="+obj[i]['idfilm']+"' class='btn btn-warning btn-sm'>Selengkapnya</a></span></td></tr>";
 		else 
 		 film=film+"<tr><td><span class='film-link'><a href='filmdeskripsi.html?film="+obj[i]['idfilm']+"' class='btn btn-warning btn-sm'>Selengkapnya</a></span></td></tr>";
 		film=film+"</table>";
@@ -74,9 +75,9 @@ $.ajax({
       
     },
     //error: viewLoading()
-  });  
+  });
 </script>
-    <!--script src="js/Chart.min.js"></script>
-    <!--script src="http://36.69.25.21/pijar/ajax/js_chart_kerinci.php"></script-->
+    
+    
   </body>
 </html>

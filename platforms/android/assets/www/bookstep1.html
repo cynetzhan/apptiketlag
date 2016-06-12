@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *;connect-src * 'self' http://36.69.25.21;script-src * 'self' 'unsafe-eval' 'unsafe-inline'">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-inline' http://pemesanantiketbioskop88pekanbaru.890m.com/; style-src 'self' 'unsafe-inline'; media-src *;connect-src * 'self' http://pemesanantiketbioskop88pekanbaru.890m.com/;script-src * 'self' 'unsafe-eval' 'unsafe-inline'">
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
@@ -26,7 +26,7 @@
               <div class="list-group">
                 <a class="list-group-item" href="index.html"><strong>Menu Utama</strong></a>
                 <a class="list-group-item" href="film.html"><strong>Info Film</strong></a>
-                <a class="list-group-item"><strong>Bantuan</strong></a>
+                <a class="list-group-item" href="bantuan.html"><strong>Bantuan</strong></a>
                 <a class="list-group-item" id="exit" href="#" ><strong>Keluar</strong></a>
               </div>
             </div>
@@ -42,37 +42,32 @@
         <form name="login" action="bookstep2.html">
 		 <div class="form-group">
 		  <label>ID Booking</label>
-          <input type="text" name="bookid" class="form-control" minlength="4" maxlength="25" placeholder="Booking ID"  value="BK2016052114310001" readonly><!--diisi id booking, generate tglwaktu dari server?-->
+          <input type="text" name="bookid" class="form-control" minlength="4" maxlength="25" placeholder="Booking ID"  value="" readonly><!--diisi id booking, generate tglwaktu dari server?-->
          </div>
 		 <div class="form-group">
 		  <label>Judul Film</label>
           <input type="text" name="judulfilm" class="form-control" minlength="4" maxlength="25" placeholder="Booking ID"  value="Judul-Judulan" readonly>
-		  <input type="hidden" name="idfilm" class="form-control" value="FM01" readonly><!--diisi id film, retrieve dari db-->
+		  <input type="hidden" name="idfilm" class="form-control" value="" readonly><!--diisi id film, retrieve dari db-->
          </div>
 		 <div class="form-group">
 		  <label>Nama Member</label>
-          <input type="text" name="namauser" class="form-control" minlength="4" maxlength="25" placeholder="Nama User"  value="Ardian Fulan" readonly>
+          <input type="text" name="namauser" class="form-control" minlength="4" maxlength="25" placeholder="Nama User"  value="" readonly>
          </div>
 		 <div class="form-group">
 		  <label>Pilihan Waktu</label>
-          <select name="pilihjam" class="form-control">
-		   <option value="ST11">12.30 : Studio 1</option>
-		   <option value="ST12">13.30 : Studio 1</option>
-		   <option value="ST33">15.30 : Studio 3</option>
-		   <option value="ST14">17.00 : Studio 1</option>
-		   <option value="ST25">20.00 : Studio 2</option>
+      <select name="pilihjam" class="form-control" id="pilihanjam">
 		  </select>
          </div>
 		 <div class="form-group">
 		  <label>Kursi</label>
-          <select name="pilihkursirow">
+          <select name="kursirow">
 		   <option value="A">A</option>
 		   <option value="B">B</option>
 		   <option value="C">C</option>
 		   <option value="D">D</option>
 		   <option value="E">E</option>
 		  </select>
-		  <select name="pilihkursicol">
+		  <select name="kursicol">
 		   <option value="1">1</option>
 		   <option value="2">2</option>
 		   <option value="3">3</option>
@@ -80,15 +75,41 @@
 		   <option value="5">5</option>
 		  </select>
          </div>
-         <button type="submit" name="submitbutton" id="loginbtn" class="btn btn-md btn-primary form-control">Lanjutkan Ke Pembayaran</button>
+         <button type="button" name="submitbutton" id="bookbtn" class="btn btn-md btn-primary form-control">Lanjutkan Ke Pembayaran</button>
         </form>
        </div>
       </div>
     </div>
+    <div id="wah"></div>
 	<script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/custom.js"></script>
-    <!--script src="js/Chart.min.js"></script>
-    <!--script src="http://36.69.25.21/pijar/ajax/js_chart_kerinci.php"></script-->
+    <script>
+      generateBookId();
+      $.getJSON("http://pemesanantiketbioskop88pekanbaru.890m.com/getjadwal.php",{idfilm:sessionStorage.filmBookCurrent,iduser:localStorage['tiket88-userid']}, function(res) {
+        console.log(res);
+        $('[name=judulfilm]').val(res.film.nama);
+        $('[name=idfilm]').val(sessionStorage.filmBookCurrent);
+        $('[name=namauser]').val(res.user.Nama);
+        $.each(res.film.jadwal, function(idf,jam) {
+          $('#pilihanjam').append($('<option>',{value:idf}).text(jam));
+          });
+        });
+        $('#bookbtn').click(function() {
+          sessionStorage.setItem("userBookIdTemp",$('[name=bookid]').val());
+          sessionStorage.setItem("userBookJamTemp",$('[name=pilihjam]').val());
+          sessionStorage.setItem("userBookKursiTemp",$('[name=kursicol]').val()+""+$('[name=kursirow]').val());
+          $.getJSON("http://pemesanantiketbioskop88pekanbaru.890m.com/prosesbook.php",{bookid:sessionStorage.userBookIdTemp,iduser:localStorage['tiket88-userid'],idbangku:sessionStorage.userBookKursiTemp,idjam:sessionStorage.userBookJamTemp,jampesan:new Date().getHours()+":"+new Date().getMinutes(),idfilm:sessionStorage.filmBookCurrent}, function(res) {
+            sessionStorage.setItem("userNamaTemp",res.nama);
+            sessionStorage.setItem("userFilmNamaTemp",res.nama_film);
+            sessionStorage.setItem("userJadwalTemp",res.Jam+" - "+res.Studio);
+            sessionStorage.setItem("userHargaTiketTemp",res.hargatiket);
+            sessionStorage.setItem("userHpNumTemp",res.no_hp);
+            window.location.replace('bookstep2.html');
+          });
+        });
+    </script>
+    
+    
   </body>
 </html>

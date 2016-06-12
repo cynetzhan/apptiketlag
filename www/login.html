@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *;connect-src * 'self' http://36.69.25.21;script-src * 'self' 'unsafe-eval' 'unsafe-inline'">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *;connect-src * 'self' http://pemesanantiketbioskop88pekanbaru.890m.com;script-src * 'self' 'unsafe-eval' 'unsafe-inline'">
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
@@ -26,7 +26,8 @@
               <div class="list-group">
                 <a class="list-group-item" href="index.html"><strong>Menu Utama</strong></a>
                 <a class="list-group-item" href="film.html"><strong>Info Film</strong></a>
-                <a class="list-group-item"><strong>Bantuan</strong></a>
+                <a class="list-group-item" href="bantuan.html"><strong>Bantuan</strong></a>
+                <a class="list-group-item" id="loginmenubtn"><strong><span id="loginstat"></span></strong></a>
                 <a class="list-group-item" id="exit" href="#" ><strong>Keluar</strong></a>
               </div>
             </div>
@@ -35,7 +36,7 @@
         </div>
       </div>
     </nav>
-    <div class="container scrollable" id="contentView">
+    <div class="container scrollable hidden" id="contentView">
 	<h2 id="title-head">Halaman Login</h2>
 	<div class="panel panel-default" id="panel-login" >
       <div class="panel-heading">Form Login</div>
@@ -43,12 +44,12 @@
         <div class="alert alert-danger hidden">Nama Pengguna atau Password yang anda masukkan salah.</div>
         <form name="login" action="bookstep1.html">
           <div class="form-group">
-            <input type="tel" name="usertel" class="form-control" minlength="4" maxlength="25" placeholder="Nomor Seluler" required>
+            <input type="text" name="userid" class="form-control" maxlength="25" placeholder="Nama Pengguna" required>
           </div>
           <div class="form-group">
             <input type="password" name="passwd" class="form-control" minlength="6" placeholder="Password" required>
           </div>
-          <button type="submit" name="submitbutton" id="loginbtn" class="btn btn-md btn-primary form-control">Login</button>
+          <button type="button" name="submitbutton" id="loginbtn" class="btn btn-md btn-primary form-control">Login</button>
         </form>
        </div>
       </div>
@@ -57,7 +58,23 @@
 	<script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/custom.js"></script>
-    <!--script src="js/Chart.min.js"></script>
-    <!--script src="http://36.69.25.21/pijar/ajax/js_chart_kerinci.php"></script-->
+    <script>
+        if(typeof localStorage['tiket88-userid']!=='undefined') {redirLogin();}
+        else {$('#contentView').removeClass('hidden')}
+        $('#loginbtn').click(function() {
+            $.get("http://pemesanantiketbioskop88pekanbaru.890m.com/ajaxuser.php",{iduser:$('[name=userid]').val(),pass:$('[name=passwd]').val()},function(res) {
+             if(res!="false"){
+             var obj=JSON.parse(res);
+             localStorage.setItem("tiket88-userid",$('[name=userid]').val());
+             localStorage.setItem("tiket88-usertel",obj.No_hp);
+             localStorage.setItem("tiket88-userpass",$('[name=passwd]').val());
+             localStorage.setItem("tiket88-userNama",obj.Nama);
+             redirLogin();
+            } else {if(navigator.notification)navigator.notification.alert("User ID atau Password yang anda masukkan salah!"); else window.alert("User ID atau Password yang anda masukkan salah!");}
+            });
+        });
+    </script>
+    
+    
   </body>
 </html>

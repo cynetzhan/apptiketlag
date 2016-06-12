@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *;connect-src * 'self' http://36.69.25.21;script-src * 'self' 'unsafe-eval' 'unsafe-inline'">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *;connect-src * 'self' http://pemesanantiketbioskop88pekanbaru.890m.com;script-src * 'self' 'unsafe-eval' 'unsafe-inline'">
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
@@ -29,7 +29,8 @@
               <div class="list-group">
                 <a class="list-group-item" href="index.html"><strong>Menu Utama</strong></a>
                 <a class="list-group-item" href="film.html"><strong>Info Film</strong></a>
-                <a class="list-group-item"><strong>Bantuan</strong></a>
+                <a class="list-group-item" href="bantuan.html"><strong>Bantuan</strong></a>
+                <a class="list-group-item" id="loginmenubtn"><strong><span id="loginstat"></span></strong></a>
                 <a class="list-group-item" id="exit" href="#" ><strong>Keluar</strong></a>
               </div>
             </div>
@@ -40,27 +41,38 @@
     </nav>
     <div class="container scrollable" id="contentView">
 	<h2 id="title-head">Film Yang Telah Dibooking</h2>
-	 <ul class="list-group">
-	  <li class="list-group-item">
-	   <table>
-	    <tr>
-	     <td rowspan="3"><img src="img/or1.jpg" class="film-thumb"/> </td>
-		 <td><span class="film-judul">Judul Film</span></td>
-	    </tr>
-	    <tr>
-	     <td><span class="film-waktu">26 Mei 2016 - [13.30] Studio 1</span></td>
-	    </tr>
-	    <tr>
-	     <td><span class="film-link"><a href="bookstep3.html" class="btn btn-warning btn-sm">Lihat Tiket</a></span></td>
-	    </tr>
-	   </table>
-	  </li>
+	 <ul class="list-group" id="bookinghist">
 	 </ul>
     </div>
 	<script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/custom.js"></script>
-    <!--script src="js/Chart.min.js"></script>
-    <!--script src="http://36.69.25.21/pijar/ajax/js_chart_kerinci.php"></script-->
+    <script>
+    if(typeof localStorage['tiket88-userid']=='undefined') {
+        localStorage.setItem("ref","bookpage");
+        window.location.replace('login.html')
+    }
+    $.get('http://pemesanantiketbioskop88pekanbaru.890m.com/jsonbookinguser.php',
+    {iduser:localStorage['tiket88-userid']},
+    function(res){
+      if(res=="[]"){
+        $("ul#bookinghist").append($("<li class='list-group-item'></li>").append("Anda belum melakukan booking apapun"));
+      } else {
+	  var obj = JSON.parse(res);
+	  for(i=0;i<obj.length;i++){
+        var tanggalfilm=new Date(parseInt(obj[i].idbook));
+		var film="<table>";
+		film=film+"<tr><td><span class='film-judul'>"+obj[i].nama_film+"</span></td></tr>";
+		film=film+"<tr><td><span class='film-waktu'>"+tglFull(tanggalfilm)+" - ["+obj[i].Jam+"] "+obj[i].Studio+"</span></td></tr>";
+        film=film+"<tr><td><span class='film-link'><a href='tiket.html?idbook="+obj[i].idbook+"' class='btn btn-warning btn-sm'>Lihat Tiket</a></span></td></tr>";
+		film=film+"</table>";
+		newlist=$("<li class='list-group-item'></li>").append(film);
+        $("ul#bookinghist").append(newlist);
+	  }
+    }
+    });
+    </script>
+    
+    
   </body>
 </html>

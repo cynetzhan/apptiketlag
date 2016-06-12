@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *;connect-src * 'self' http://36.69.25.21;script-src * 'self' 'unsafe-eval' 'unsafe-inline'">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *;connect-src * 'self' http://pemesanantiketbioskop88pekanbaru.890m.com;script-src * 'self' 'unsafe-eval' 'unsafe-inline'">
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
@@ -26,7 +26,7 @@
               <div class="list-group">
                 <a class="list-group-item" href="index.html"><strong>Menu Utama</strong></a>
                 <a class="list-group-item" href="film.html"><strong>Info Film</strong></a>
-                <a class="list-group-item"><strong>Bantuan</strong></a>
+                <a class="list-group-item" href="bantuan.html"><strong>Bantuan</strong></a>
                 <a class="list-group-item" id="exit" href="#" ><strong>Keluar</strong></a>
               </div>
             </div>
@@ -39,33 +39,38 @@
 	<h2 class="title-head">Pilih Jenis Pembayaran</h2>
 	 <ul class="nav nav-tabs">
 	  <li class="active"><a data-toggle="tab" href="#pulsa">Potong Pulsa</a></li>
-	  <li><a data-toggle="tab" href="#kredit">Kartu Kredit</a></li>
 	 </ul>	 
 	  <div class="tab-content">
 		<div id="pulsa" class="tab-pane fade in active">
 		  <div class="panel panel-default" id="panel-login" >
-		  <div class="panel-heading">Detail Nomor Selular</div>
+		  <div class="panel-heading">Detail Pembayaran</div>
 		   <div class="panel-body">
 		   <form name="bayarpulsa" action="bookstep3.html">
-			 <div class="form-group">
+       <div class="form-group">
+			  <label>Booking ID</label>
+        <br><span id="idbooktext"></span>
+			 </div>
+       <div class="form-group">
+			  <label>Nama</label>
+			  <br><span id="namabooktext"></span>
+			 </div>
+       <div class="form-group">
+			  <label>Film</label>
+			  <br><span id="filmbooktext"></span>
+			 </div>
+       <div class="form-group">
+			  <label>Jam-Studio</label>
+			  <br><span id="jambooktext"></span>
+			 </div>
+       <div class="form-group">
+			  <label>Harga</label>
+			  <br><span id="hargabooktext"></span>
+			 </div>
+       <div class="form-group">
 			  <label>No Selular</label>
 			  <input type="text" name="nohp" class="form-control" minlength="4" maxlength="25" placeholder="Nomor Selular"/>
 			 </div>
-			 <button type="submit" name="submitbutton" id="loginbtn" class="btn btn-md btn-primary form-control">Proses Pembayaran</button>
-			</form>
-		   </div>
-		  </div>
-		</div>
-    <div id="kredit" class="tab-pane fade in">
-		  <div class="panel panel-default" id="panel-login" >
-		  <div class="panel-heading">Detail Kartu Kredit</div>
-		   <div class="panel-body">
-		   <form name="bayarkredit" action="bookstep3.html">
-			 <div class="form-group">
-			  <label>No Kartu Kredit</label>
-			  <input type="text" name="cardid" class="form-control" minlength="4" maxlength="25" placeholder="Nomor Kartu Kredit"/>
-			 </div>
-			 <button type="submit" name="submitbutton" id="loginbtn" class="btn btn-md btn-primary form-control">Proses Pembayaran</button>
+			 <button type="button" name="submitbutton" id="bayarbtn" class="btn btn-md btn-primary form-control">Proses Pembayaran</button>
 			</form>
 		   </div>
 		  </div>
@@ -75,7 +80,26 @@
 	<script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/custom.js"></script>
-    <!--script src="js/Chart.min.js"></script>
-    <!--script src="http://36.69.25.21/pijar/ajax/js_chart_kerinci.php"></script-->
+    <script>
+    $('document').ready(function() {
+     $('#idbooktext').text(sessionStorage.getItem("userBookIdTemp"));
+     $('#namabooktext').text(sessionStorage.getItem("userNamaTemp"));
+     $('#filmbooktext').text(sessionStorage.getItem("userFilmNamaTemp"));
+     $('#jambooktext').text(sessionStorage.getItem("userJadwalTemp"));
+     $('#hargabooktext').text(sessionStorage.getItem("userHargaTiketTemp"));
+     $('[name=nohp]').val(sessionStorage.getItem("userHpNumTemp"));
+    });
+    $('#bayarbtn').click(function() {
+        $.get('http://pemesanantiketbioskop88pekanbaru.890m.com/prosesbayar.php',{idbook:$('#idbooktext').text(),harga:$('#hargabooktext').text()},function(res) {
+          if(res=="success"){
+            window.location.replace('bookstep3.html');
+            } else {
+              window.location.replace('bookstep3.html');
+            }
+        });
+    });
+    </script>
+    
+    
   </body>
 </html>

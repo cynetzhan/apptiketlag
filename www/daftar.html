@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *;connect-src * 'self' http://36.69.25.21;script-src * 'self' 'unsafe-eval' 'unsafe-inline'">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *;connect-src * 'self' http://pemesanantiketbioskop88pekanbaru.890m.com;script-src * 'self' 'unsafe-eval' 'unsafe-inline'">
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
@@ -26,7 +26,8 @@
               <div class="list-group">
                 <a class="list-group-item" href="index.html"><strong>Menu Utama</strong></a>
                 <a class="list-group-item" href="film.html"><strong>Info Film</strong></a>
-                <a class="list-group-item"><strong>Bantuan</strong></a>
+                <a class="list-group-item" href="bantuan.html"><strong>Bantuan</strong></a>
+                <a class="list-group-item" id="loginmenubtn"><strong><span id="loginstat"></span></strong></a>
                 <a class="list-group-item" id="exit" href="#" ><strong>Keluar</strong></a>
               </div>
             </div>
@@ -41,7 +42,7 @@
       <div class="panel-heading">Form Pendaftaran</div>
        <div class="panel-body">
         <div class="alert alert-danger hidden">Nama Pengguna atau Password yang anda masukkan salah.</div>
-        <form name="login" action="bookstep1.html">
+        <form name="daftar">
           <div class="form-group">
             <input type="text" name="username" class="form-control" minlength="4" maxlength="25" placeholder="Nama Pengguna" required>
           </div>
@@ -51,15 +52,67 @@
           <div class="form-group">
             <input type="password" name="passwd" class="form-control" minlength="6" placeholder="Password" required>
           </div>
-          <button type="submit" name="submitbutton" id="loginbtn" class="btn btn-md btn-primary form-control">Daftar</button>
+          <button type="button" data-toggle="modal" data-target="#confirmSignup" class="btn btn-md btn-primary form-control" id="signcfm">Lanjutkan</button>
         </form>
        </div>
       </div>
-	</div>
+	</div><!--end content view-->
+
+<!-- Modal -->
+<div id="confirmSignup" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Cek Data Anda Kembali!</h4>
+      </div>
+      <div class="modal-body">
+        <table>
+          <tr>
+            <th>Nama Pengguna</th>
+            <td id="useridcfm"></td>
+          </tr>
+          <tr>
+            <th>Nomor Handphone</th>
+            <td id="userhpcfm"></td>
+          </tr>
+          <tr>
+            <td colspan="2">Apakah data ini benar?</td>
+          </tr>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-md btn-warning" data-dismiss="modal">Tidak, Kembali isi data!</button>
+        <button type="button" class="btn btn-md btn-primary" id="daftarbtn">Ya, Daftarkan Saya!</button>
+      </div>
+    </div>
+
+  </div>
+</div>
 	<script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/custom.js"></script>
-    <!--script src="js/Chart.min.js"></script>
-    <!--script src="http://36.69.25.21/pijar/ajax/js_chart_kerinci.php"></script-->
+    <script>
+      if(typeof localStorage['tiket88-userid']!=='undefined') {redirLogin();}
+      $('#signcfm').click(function() {
+        $('#useridcfm').html($('[name=username]').val());
+        $('#userhpcfm').html($('[name=usertel]').val());
+      });
+      $('#daftarbtn').click(function() {
+        $.get("http://pemesanantiketbioskop88pekanbaru.890m.com/prosesdaftar.php",{username:$('[name=username]').val(),hp:$('[name=usertel]').val(),passw:$('[name=passwd]').val()},function(res) {
+         if(res=="existed" || res=="false") {if(navigator.notification)navigator.notification.alert("User ID atau Password yang anda masukkan sudah terdaftar!"); else window.alert("User ID atau Password yang anda masukkan sudah terdaftar!");window.location.reload();} else {
+         var obj=JSON.parse(res);
+         localStorage.setItem("tiket88-userid",obj.id_User);
+         localStorage.setItem("tiket88-usertel",obj.No_hp);
+         localStorage.setItem("tiket88-userpass",$('[name=passwd]').val());
+         localStorage.setItem("tiket88-userNama",obj.Nama);
+         redirLogin();
+        }
+        });
+      });
+    </script>
+    
   </body>
 </html>
